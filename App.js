@@ -10,81 +10,78 @@ export default function App() {
   const [resultado, setResultado] = useState('')
 
   const handleConverter = async () => {
-  let URL = `https://economia.awesomeapi.com.br/last/${moedaOrigem}-${moedaDestino}`;
-  try {
-    let page = await fetch(URL);
-    let json = await page.json();
-    //console.log(json)
-    let indice = parseFloat(json[`${moedaOrigem}${moedaDestino}`].high)
-    //setResultado(indice)
-    let valor = parseFloat(valorEntrada)
-    setResultado((indice*valor).toFixed(2))
-  } catch (error) {
-    setResultado(`Erro: ${error.message}`)
-  }
-  }
+    let URL = `https://economia.awesomeapi.com.br/last/${moedaOrigem}-${moedaDestino}`;
+    try {
+      let page = await fetch(URL);
+      let json = await page.json();
+      // console.log(json);
+      let indice = parseFloat(json[`${moedaOrigem}${moedaDestino}`].high)
+      // setResultado(indice)
+      let valor = parseFloat(valorEntrada)
+      setResultado((indice*valor).toFixed(2))
+    } catch (error) {
+      setResultado(`Erro: ${error.message}`)
+    }
+   }
 
   const handleLimpar = () => {
     setResultado('');
     setVAlorEntrada('33.33333');
     setMoedaOrigem('BRL');
     setMoedaDestino('USD');
-  }
+   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Conversor de Moedas</Text>
+      <Text style={styles.title}>Convesor de Moedas</Text>
       <View>
         <Text style={styles.tbMoeda}>Moeda 1</Text>
         <Picker
-        style={styles.picker}
+          style={styles.picker}
           selectedValue={moedaOrigem}
           onValueChange={(itemValue, itemIndex) =>
             setMoedaOrigem(itemValue)
           }>
           <Picker.Item label="Real Brasileiro" value="BRL" />
           <Picker.Item label="Dólar Americano" value="USD" />
-          <Picker.Item label="Bitcoin" value="BTC" />
+          <Picker.Item label="Peso Argentino" value="ARS" />
+          <Picker.Item label="Libra Esterlina" value="GBP" />
           <Picker.Item label="Dogecoin" value="DOGE" />
-          <Picker.Item label="Ethereum" value="ETH" />
-          <Picker.Item label="Iene Japonês" value="JPY" />
+          <Picker.Item label="Bitcoin" value="BTC" />
         </Picker>
       </View>
       <View>
         <Text style={styles.tbMoeda}>Moeda 2</Text>
         <Picker
-        style={styles.picker}
+          style={styles.picker}
           selectedValue={moedaDestino}
           onValueChange={(itemValue, itemIndex) =>
             setMoedaDestino(itemValue)
           }>
           <Picker.Item label="Real Brasileiro" value="BRL" />
           <Picker.Item label="Dólar Americano" value="USD" />
-          <Picker.Item label="Bitcoin" value="BTC" />
+          <Picker.Item label="Peso Argentino" value="ARS" />
+          <Picker.Item label="Libra Esterlina" value="GBP" />
           <Picker.Item label="Dogecoin" value="DOGE" />
-          <Picker.Item label="Ethereum" value="ETH" />
-          <Picker.Item label="Iene Japonês" value="JPY" />
+          <Picker.Item label="Bitcoin" value="BTC" />
         </Picker>
       </View>
       <View>
-        <Text style={styles.tbMoeda}>Valor para conversão</Text>
+        <Text style={styles.tbMoeda}>Valo para Conversão</Text>
         <TextInput
-        style={styles.input}
-        value={valorEntrada}
-        onChangeText={setVAlorEntrada}
-        keyboardType='numeric'>
+          style={styles.input}
+          value={valorEntrada}
+          onChangeText={setVAlorEntrada}
+          keyboardType='numeric'>
         </TextInput>
       </View>
-      <Pressable style={styles.button} onPress={handleConverter}>
-        <Text style={styles.title}>Converter</Text>
+      <Pressable onPress={handleConverter} style={styles.button}>
+        <Text style={styles.title}>Conveter</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={handleLimpar}>
+      <Pressable onPress={handleLimpar} style={styles.button}>
         <Text style={styles.title}>Limpar</Text>
       </Pressable>
-      <View>
-        <Text style={styles.title}>Resultado</Text>
-        <Text style={styles.title}>{resultado}</Text>
-      </View>
+      <View><Text style={styles.lbResultado}>{resultado}</Text></View>
       <StatusBar style="auto" />
     </View>
   );
@@ -99,27 +96,22 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff'
-
   },
   picker: {
     color: '#fff',
     width: 200,
-    height: 40,
+    height: 50,
     backgroundColor: '#000'
-
   },
   input: {
     color: '#fff',
     textAlign: 'right',
     height: 40,
     width: 200
-
-
   },
   tbMoeda: {
     color: '#fff'
   },
-
   button: {
     width: 200,
     height: 40,
@@ -128,6 +120,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 5,
+    borderRadius: 5
+  },
+  lbResultado: {
+    color: '#fff'
   }
 });
