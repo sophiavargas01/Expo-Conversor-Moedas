@@ -75,6 +75,7 @@ export default function App() {
           keyboardType='numeric'>
         </TextInput>
       </View>
+      <Text></Text>
       <Pressable onPress={handleConverter} style={styles.button}>
         <Text style={styles.title}>Conveter</Text>
       </Pressable>
